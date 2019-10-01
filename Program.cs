@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ConsoleApp4
 {
     class Program
     {
+        public class CDForest
+        {
+            public List<CDInfo> Disks { get; set; }
+        }
+
         public class CDInfo
         {
             public int DiskId { get; set; }
@@ -53,7 +60,20 @@ namespace ConsoleApp4
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            CDForest f = new CDForest();
+            string fileName = "forest.json";
+            if(args.Length == 1 && File.Exists(args[0]))
+            {
+                fileName = args[0];
+                
+            }
+
+            if(File.Exists(fileName))
+            {
+                f = JsonSerializer.Deserialize<CDForest>(File.ReadAllText(fileName));
+            }
+
+            f.Disks = f.Disks ?? new List<CDInfo>();
 
             DriveInfo[] theCollectionOfDrives = DriveInfo.GetDrives();
             foreach (DriveInfo curDrive in theCollectionOfDrives)
@@ -64,7 +84,9 @@ namespace ConsoleApp4
                     {
                         var diskName = curDrive.Name;
 
-                        CDInfo disk = new CDInfo { Name = curDrive.Name };
+                        CDInfo disk = new CDInfo { Name = curDrive.Name, Directories = new List<CDDirectoryInfo>() };
+
+                        f.Disks.Add(disk);
 
                         Stack<DirectoryInfo> directories = new Stack<DirectoryInfo>();
 
@@ -110,6 +132,8 @@ namespace ConsoleApp4
                     }
                 }
             }
+
+            File.WriteAllText(fileName, JsonSerializer.Serialize<CDForest>(f));
         }
     }
 }
