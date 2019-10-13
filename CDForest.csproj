@@ -5,4 +5,8 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="TikaOnDotnet.TextExtractor" Version="1.17.1" />
+  </ItemGroup>
+
 </Project>

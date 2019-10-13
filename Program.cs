@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CDForest;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,35 +25,37 @@ namespace ConsoleApp4
             public List<CDDirectoryInfo> Directories { get; set; }
         }
 
-        public class CDFileInfo
-        {
-            public CDFileInfo()
-            {
+		public class CDFileInfo
+		{
+			public CDFileInfo()
+			{
 
-            }
+			}
 
-            public CDFileInfo(FileInfo file)
-            {
-                Created = file.CreationTimeUtc;
-                Extension = file.Extension;
-                Modified = file.LastWriteTimeUtc;
-                Name = file.Name;
-                Path = file.FullName;
-                Size = file.Length;
-            }
+			public CDFileInfo(FileInfo file)
+			{
+				Created = file.CreationTimeUtc;
+				Extension = file.Extension;
+				Modified = file.LastWriteTimeUtc;
+				Name = file.Name;
+				Path = file.FullName;
+				Size = file.Length;
+			}
 
-            public string Name { get; set; }
+			public string Name { get; set; }
 
-            public string Extension { get; set; }
+			public string Extension { get; set; }
 
-            public string Path { get; set; }
+			public string Path { get; set; }
 
-            public DateTime Created { get; set; }
+			public DateTime Created { get; set; }
 
-            public DateTime? Modified { get; set; }
+			public DateTime? Modified { get; set; }
 
-            public long Size { get; set; }
-        }
+			public long Size { get; set; }
+
+			public FileParseResult Parse {get;set;}
+		}
 
         public class CDDirectoryInfo
         {
@@ -229,7 +232,10 @@ namespace ConsoleApp4
             forest.Disks ??= new List<CDInfo>();
 
             DriveInfo[] theCollectionOfDrives = DriveInfo.GetDrives();
-            foreach (DriveInfo curDrive in theCollectionOfDrives)
+
+			var filter = new ApacheTikaFilter();
+
+			foreach (DriveInfo curDrive in theCollectionOfDrives)
             {
                 if (curDrive.DriveType == DriveType.CDRom)
                 {
@@ -295,6 +301,11 @@ namespace ConsoleApp4
                                 CDFileInfo fileItem = new CDFileInfo(file);
                                 size += file.Length;
                                 directoryItem.Files.Add(fileItem);
+								if(filter.IsTextFile(fileItem.Path))
+								{
+									var result = new FileAnalyser(fileItem.Path).Parse(20);
+									fileItem.Parse = result;
+								}
                             }
 
                             directoryItem.Size = size;
