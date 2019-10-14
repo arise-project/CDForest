@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CDForest", "CDForest.csproj", "{90A8B754-9388-403E-8E9F-6871A14C70D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDForestFull", "..\CDForestFull\CDForestFull.csproj", "{6A980324-A332-41FF-B233-72BEBD32F7E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDForestFull", "CDForestFull\CDForestFull.csproj", "{6A980324-A332-41FF-B233-72BEBD32F7E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

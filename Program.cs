@@ -1,5 +1,4 @@
-﻿using CDForest;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
 
-namespace ConsoleApp4
+namespace CDForest
 {
     class Program
     {
@@ -53,8 +52,6 @@ namespace ConsoleApp4
 			public DateTime? Modified { get; set; }
 
 			public long Size { get; set; }
-
-			public FileParseResult Parse {get;set;}
 		}
 
         public class CDDirectoryInfo

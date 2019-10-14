@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CDForestFull\**" />
+    <EmbeddedResource Remove="CDForestFull\**" />
+    <None Remove="CDForestFull\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="TikaOnDotnet.TextExtractor" Version="1.17.1" />
   </ItemGroup>
 
