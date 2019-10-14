@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace CDForest
+namespace CDForestFull
 {
 	public class WordSplitter
 	{
@@ -57,7 +57,7 @@ namespace CDForest
 						{
 							result.Add(sb.ToString());
 						}
-							
+
 					}
 
 					var r = letter.ToString();
@@ -65,7 +65,7 @@ namespace CDForest
 					{
 						result.Add(letter.ToString());
 					}
-						
+
 					sb = new StringBuilder();
 				}
 			}

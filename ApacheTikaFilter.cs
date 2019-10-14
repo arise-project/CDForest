@@ -1,13 +1,13 @@
 ﻿using System.IO;
 
-namespace CDForest
+namespace CDForestFull
 {
 	public class ApacheTikaFilter
 	{
 
 		public bool IsKnownFile(string path)
 		{
-			switch(Path.GetExtension(path).ToLower())
+			switch (Path.GetExtension(path).ToLower())
 			{
 				case ".pdf":
 				case ".doc":
@@ -56,8 +56,9 @@ namespace CDForest
 				case ".ppt":
 				case ".pptx":
 				case ".rtf":
-				case ".jpg":
 					return true;
+				case ".jpg":
+					return false;
 			}
 
 			return false;

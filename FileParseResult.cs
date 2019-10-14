@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CDForest
+namespace CDForestFull
 {
 	public class FileParseResult
 	{

@@ -1,6 +1,7 @@
-﻿using TikaOnDotNet.TextExtraction;
+﻿using System;
+using TikaOnDotNet.TextExtraction;
 
-namespace CDForest
+namespace CDForestFull
 {
 	public class FileAnalyser
 	{
@@ -26,11 +27,11 @@ namespace CDForest
 			{
 				textExtractionResult = new TextExtractor().Extract(_path);
 			}
-			catch
+			catch(Exception ex)
 			{
 				return null;
 			}
-			
+
 			_text = textExtractionResult.Text;
 			var words = _wordSplitter.Split(_text);
 			_wordFrequencyAnalyser.Analyse(words);

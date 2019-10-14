@@ -15,3 +15,5 @@
 /packages/TikaOnDotnet.1.17.1
 /packages/TikaOnDotnet.TextExtractor.1.17.1
 /CDForestFull/CDForestFull.csproj.user
+/*.user
+/bin/Debug

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CDForest
+namespace CDForestFull
 {
 	public class WordFrequencyAnalyser
 	{
@@ -16,10 +16,10 @@ namespace CDForest
 		{
 			Frequency.Clear();
 
-			foreach(var word in words)
+			foreach (var word in words)
 			{
 				var c = word.ToLower();
-				if(Frequency.ContainsKey(c))
+				if (Frequency.ContainsKey(c))
 				{
 					Frequency[c]++;
 				}

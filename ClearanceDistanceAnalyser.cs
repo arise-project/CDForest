@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace CDForest
+namespace CDForestFull
 {
 	public class ClearanceDistanceAnalyser
 	{
@@ -13,13 +13,13 @@ namespace CDForest
 			HDistances.Clear();
 			Distances.Clear();
 			int index = 0;
-			while(index + clearance < words.Count)
+			while (index + clearance < words.Count)
 			{
 				var range = words.GetRange(index, clearance);
 
 				var first = range.FirstOrDefault();
 
-				if(string.IsNullOrEmpty(first))
+				if (string.IsNullOrEmpty(first))
 				{
 					index++;
 					continue;
@@ -28,10 +28,10 @@ namespace CDForest
 				var f = first.ToLower().GetHashCode();
 				if (HDistances.ContainsKey(f))
 				{
-					foreach(var curr in range.Skip(1))
+					foreach (var curr in range.Skip(1))
 					{
 						var c = curr.ToLower().GetHashCode();
-						if(!HDistances[f].Contains(c))
+						if (!HDistances[f].Contains(c))
 						{
 							HDistances[f].Add(c);
 							Distances[f].Add(c);
