@@ -1,11 +1,11 @@
 ﻿using CDForest;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Text.Json;
 
 namespace ConsoleApp4
 {
@@ -226,12 +226,14 @@ namespace ConsoleApp4
 
             if(File.Exists(fileName))
             {
-                forest = JsonSerializer.Deserialize<CDForest>(File.ReadAllText(fileName));
+                forest = JsonConvert.DeserializeObject<CDForest>(File.ReadAllText(fileName));
             }
 
-            forest.Disks ??= new List<CDInfo>();
+            forest.Disks = forest.Disks ?? new List<CDInfo>();
 
             DriveInfo[] theCollectionOfDrives = DriveInfo.GetDrives();
+
+			var filter = new ApacheTikaFilter();
 
 			foreach (DriveInfo curDrive in theCollectionOfDrives)
             {
@@ -299,6 +301,11 @@ namespace ConsoleApp4
                                 CDFileInfo fileItem = new CDFileInfo(file);
                                 size += file.Length;
                                 directoryItem.Files.Add(fileItem);
+								if(filter.IsTextFile(fileItem.Path))
+								{
+									var result = new FileAnalyser(fileItem.Path).Parse(20);
+									fileItem.Parse = result;
+								}
                             }
 
                             directoryItem.Size = size;
@@ -317,7 +324,7 @@ namespace ConsoleApp4
                 }
             }
 
-            File.WriteAllText(fileName, JsonSerializer.Serialize(forest, new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(forest, Formatting.Indented));
         }
     }
 }

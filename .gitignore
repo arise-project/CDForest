@@ -8,3 +8,10 @@
 /bin/Debug/netcoreapp2.1
 /obj
 /bin/Debug/netcoreapp3.0
+/CDForestFull/bin/Debug
+/CDForestFull/obj/Debug
+/packages/IKVM.8.1.5717.0
+/packages/Newtonsoft.Json.12.0.2
+/packages/TikaOnDotnet.1.17.1
+/packages/TikaOnDotnet.TextExtractor.1.17.1
+/CDForestFull/CDForestFull.csproj.user
