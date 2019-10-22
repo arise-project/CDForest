@@ -10,7 +10,7 @@ namespace CDForestFull
 
 		public Dictionary<int, string> Hash { get; } = new Dictionary<int, string>();
 
-		public Dictionary<string, int> Frequency { get; } = new Dictionary<string, int>();
+		public Dictionary<int, int> Frequency { get; } = new Dictionary<int, int>();
 
 		public void Analyse(List<string> words)
 		{
@@ -19,16 +19,17 @@ namespace CDForestFull
 			foreach (var word in words)
 			{
 				var c = word.ToLower();
-				if (Frequency.ContainsKey(c))
+				var h = c.GetHashCode();
+				if (Frequency.ContainsKey(h))
 				{
-					Frequency[c]++;
+					Frequency[h]++;
 				}
 				else
 				{
-					Frequency.Add(c, 1);
-					if (!Hash.ContainsKey(c.GetHashCode()))
+					Frequency.Add(h, 1);
+					if (!Hash.ContainsKey(h))
 					{
-						Hash.Add(c.GetHashCode(), c);
+						Hash.Add(h, c);
 					}
 				}
 			}

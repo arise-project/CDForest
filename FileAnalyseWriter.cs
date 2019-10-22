@@ -34,7 +34,7 @@ namespace CDForestFull
 
 			int frequencyOffset = hashOffset + hashSize + 4 * 10;
 
-			int frequencySize = result.Frequency.Sum(h => Encoding.UTF8.GetBytes(h.Key).Length) + result.Frequency.Count * 8;
+			int frequencySize = result.Frequency.Count() * 4 + result.Frequency.Count * 8;
 
 			int distancesOffset = frequencyOffset + frequencySize + 4 * 10;
 
@@ -61,14 +61,14 @@ namespace CDForestFull
 			}
 		}
 
-		public static void WriteFrequency(BinaryWriter bw, Dictionary<string, int> frequency)
+		public static void WriteFrequency(BinaryWriter bw, Dictionary<int, int> frequency)
 		{
 			for (int i = 10; i < 20; i++)
 				bw.Write(i);
 
 			foreach (var c in frequency)
 			{
-				bw.Write(Encoding.UTF8.GetBytes(c.Key));
+				bw.Write(c.Key);
 				bw.Write(c.Value);
 				bw.Write(new byte[] { 0, 0, 0, 0 });
 			}
