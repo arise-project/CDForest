@@ -321,10 +321,15 @@ namespace CDForestFull
 
 									if (!File.Exists(output))
 									{
-										var result = new FileAnalyser(fileItem.Path).Parse(20);
+										var result = new FileAnalyser(fileItem.Path).Parse(20).FilterMedian(500);
 
 										if (result != null)
-											fileItem.SearchFile = new FileAnalyseWriter().WriteToFile(fileItem.Path, result, hash, output);
+											fileItem.SearchFile = new FileAnalyseWriter().WriteToFile(
+												fileItem.Path, 
+												result, 
+												hash, 
+												output,
+												Features.Distances|Features.Frequency|Features.Hash|Features.MedianFilter);
 									}
 								}
 							}

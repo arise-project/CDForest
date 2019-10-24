@@ -76,8 +76,18 @@ namespace CDForestFull
 			return list.NthOrderStatistic(mid);
 		}
 
-		public static FileParseResult Filter(FileParseResult input)
+		public static FileParseResult FilterMedian(this FileParseResult input, int treshold)
 		{
+			if(input == null)
+			{
+				return null;
+			}
+
+			if(input.Hash.Count < treshold)
+			{
+				return input;
+			}
+
 			List<KeyValuePair<int, int>> sortedFrequency = input.Frequency.ToList();
 
 			sortedFrequency.Sort(
@@ -95,19 +105,31 @@ namespace CDForestFull
 
 			for (int i = 0; i < sortedFrequency.Count; i++)
 			{
-				if(sortedFrequency[i].Value >= median)
+				if(sortedFrequency[i].Value < median)
 				{
 					output.Frequency.Add(sortedFrequency[i].Key, sortedFrequency[i].Value);
 				}
 			}
 
-			for (int i = 0; i < output.Frequency.Count; i++)
+			foreach (int i in output.Frequency.Keys)
 			{
-				if (output.Frequency[i].Key >= median)
+				if (!output.Distances.ContainsKey(output.Frequency[i]))
 				{
-					output.Frequency.Add(sortedFrequency[i].Key, sortedFrequency[i].Value);
+					output.Distances.Remove(output.Frequency[i]);
+				}
+				else
+				{
+					foreach (int j in output.Frequency.Keys)
+					{
+						if (!output.Distances[output.Frequency[i]].Contains(output.Frequency[j]) || i == j)
+						{
+							output.Distances[output.Frequency[i]].Remove(output.Frequency[j]);
+						}
+					}
 				}
 			}
+
+			return output;
 		}
 	}
 }

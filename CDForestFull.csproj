@@ -140,6 +140,7 @@
     <Compile Include="ApacheTikaFilter.cs" />
     <Compile Include="ArchiveAnayser.cs" />
     <Compile Include="ClearanceDistanceAnalyser.cs" />
+    <Compile Include="Features.cs" />
     <Compile Include="FileAnalyser.cs" />
     <Compile Include="FileAnalyseWriter.cs" />
     <Compile Include="FileParseResult.cs" />

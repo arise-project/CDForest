@@ -8,13 +8,13 @@ namespace CDForestFull
 {
 	public class FileAnalyseWriter
 	{
-		public string WriteToFile(string fileName, FileParseResult result, byte[] hash, string output)
+		public string WriteToFile(string fileName, FileParseResult result, byte[] hash, string output, Features features)
 		{
 			using (Stream stream = new FileStream(output, FileMode.Create))
 			{
 				using (BinaryWriter bw = new BinaryWriter(stream))
 				{
-					WriteHeader(bw, result);
+					WriteHeader(bw, result, (int)features);
 					WriteHash(bw, result.Hash);
 					WriteFrequency(bw, result.Frequency);
 					WriteDistances(bw, result.Distances);
@@ -26,7 +26,7 @@ namespace CDForestFull
 			return output;
 		}
 
-		public static void WriteHeader(BinaryWriter bw, FileParseResult result)
+		public static void WriteHeader(BinaryWriter bw, FileParseResult result, int features)
 		{
 			int hashOffset = 6 * 4 + 4 * 10;
 
@@ -38,7 +38,7 @@ namespace CDForestFull
 
 			int distancesOffset = frequencyOffset + frequencySize + 4 * 10;
 
-			int distancesSize = result.Distances.Sum(h => h.Value.Count) + result.Distances.Count * 8;
+			int distancesSize = result.Distances.Sum(h => h.Value.Count) + result.Distances.Count * 8 + 4;
 
 			bw.Write(hashOffset);
 			bw.Write(hashSize);
@@ -46,6 +46,7 @@ namespace CDForestFull
 			bw.Write(frequencySize);
 			bw.Write(distancesOffset);
 			bw.Write(distancesSize);
+			bw.Write(features);
 		}
 
 		public static void WriteHash(BinaryWriter bw, Dictionary<int, string> hash)
