@@ -23,21 +23,28 @@ namespace CDSearchApp
             Console.WriteLine("Search text:");
             var search = Console.ReadLine().Split(' ').Select(s => s.ToLower());
 
+            var checker = new FileAnalyseChecker();
             var reader = new FileAnalyseReader();
             List<FileRating> ratings = new List<FileRating>();
             var ratingAnalyser = new FileRatingAnalyser();
             foreach (var file in Directory.GetFiles(folder, "*.search.*"))
             {
+                if (!checker.Check(file))
+                {
+                    Console.WriteLine("Wrong Format {0}", file);
+                    continue;
+                }
+
                 var fileResult = reader.Read(file);
 
-                if(fileResult == null)
+                if (fileResult == null)
                 {
                     continue;
                 }
 
                 var rating = ratingAnalyser.Analyse(file, fileResult, search);
 
-                if(rating == null)
+                if (rating == null)
                 {
                     continue;
                 }
@@ -45,7 +52,7 @@ namespace CDSearchApp
                 ratings.Add(rating);
             }
 
-            foreach(var rating in ratings.OrderBy(r => r.Rating))
+            foreach (var rating in ratings.OrderBy(r => r.Rating))
             {
                 Console.WriteLine(rating.FileName);
                 Console.WriteLine("Found:{0}", string.Join(",", rating.Occurances));

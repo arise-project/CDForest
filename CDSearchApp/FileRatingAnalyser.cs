@@ -16,13 +16,13 @@ namespace CDSearchApp
                 MinDistances = new int[words.Count(s => input.Hash.ContainsValue(s))],
                 Rating = 0
             };
-            
-            if(result.Occurances.Count == 0)
+
+            if (result.Occurances.Count == 0)
             {
                 return null;
             }
 
-            var hases = words.Select(w => input.Hash.Any(h => string.Equals(h.Value, w))? input.Hash.First(h => string.Equals(h.Value, w)).Key : 0);
+            var hases = words.Select(w => input.Hash.Any(h => string.Equals(h.Value, w)) ? input.Hash.First(h => string.Equals(h.Value, w)).Key : 0);
             var distances = input.Distances.Where(d => hases.Any(h => h == d.Key));
 
             int index = 0;
@@ -31,7 +31,7 @@ namespace CDSearchApp
                 int rating = 0;
                 foreach (var distance in distances)
                 {
-                    if(distance.Value.Contains(hash))
+                    if (distance.Value.Contains(hash))
                     {
                         rating++;
                     }
