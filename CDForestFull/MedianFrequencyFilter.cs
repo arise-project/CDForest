@@ -104,7 +104,7 @@ namespace CDForestFull
 
             for (int i = 0; i < sortedFrequency.Count; i++)
             {
-                if (sortedFrequency[i].Value < median)
+                if (median < treshold || sortedFrequency[i].Value <= median)
                 {
                     output.Frequency.Add(sortedFrequency[i].Key, sortedFrequency[i].Value);
                 }

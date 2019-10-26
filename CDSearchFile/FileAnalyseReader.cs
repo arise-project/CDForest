@@ -12,6 +12,7 @@ namespace CDSearchFile
         int frequencySize;
         int distancesOffset;
         int distancesSize;
+        int features;
 
         public FileParseResult Read(string fileName)
         {
@@ -39,7 +40,7 @@ namespace CDSearchFile
 
                 int zeros = 0;
                 List<int> d = new List<int>();
-                while (zeros < 2)
+                while (zeros < 1)
                 {
                     int b = reader.ReadInt32();
                     if (b != 0)
@@ -69,7 +70,8 @@ namespace CDSearchFile
                 var h = reader.ReadInt32();
                 var c = reader.ReadInt32();
                 frequency.Add(h, c);
-                size -= 8;
+                int cs1 = reader.ReadInt32();
+                size -= 12;
             }
 
             return frequency;
@@ -123,6 +125,7 @@ namespace CDSearchFile
             frequencySize = reader.ReadInt32();
             distancesOffset = reader.ReadInt32();
             distancesSize = reader.ReadInt32();
+            features = reader.ReadInt32();
         }
 
         private void SkipBeginMarker(BinaryReader reader)

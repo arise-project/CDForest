@@ -10,12 +10,13 @@ namespace CDSearchFile
         int frequencySize;
         int distancesOffset;
         int distancesSize;
+        int features;
 
         public bool Check(string fileName)
         {
             using (var reader = new BinaryReader(File.OpenRead(fileName)))
             {
-                return CheckHeader(reader) && CheckHash(reader) && CheckFrequency(reader) && CheckDistances(reader) && !reader.BaseStream.CanRead;
+                return CheckHeader(reader) && CheckHash(reader) && CheckFrequency(reader) && CheckDistances(reader);
             }
         }
 
@@ -79,6 +80,13 @@ namespace CDSearchFile
                 return false;
             }
 
+            if (!reader.BaseStream.CanRead)
+            {
+                return false;
+            }
+
+            features = reader.ReadInt32();
+
             return true;
         }
 
@@ -102,7 +110,7 @@ namespace CDSearchFile
         {
             for (int i = 0; i < 10; i++)
             {
-                if (!reader.BaseStream.CanRead || reader.ReadInt32() != 0)
+                if (!reader.BaseStream.CanRead || reader.ReadInt32() != i)
                 {
                     return false;
                 }

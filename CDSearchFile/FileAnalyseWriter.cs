@@ -33,7 +33,7 @@ namespace CDSearchFile
 
             int frequencyOffset = hashOffset + hashSize + 4 * 10;
 
-            int frequencySize = result.Frequency.Count() * 4 + result.Frequency.Count * 8;
+            int frequencySize = result.Frequency.Count * 4 + result.Frequency.Count * 8;
 
             int distancesOffset = frequencyOffset + frequencySize + 4 * 10;
 
