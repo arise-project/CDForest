@@ -28,6 +28,11 @@ namespace CDSearchApp
             int index = 0;
             foreach (var hash in hases)
             {
+                if(hash == 0)
+                {
+                    continue;
+                }
+
                 int rating = 0;
                 foreach (var distance in distances)
                 {
