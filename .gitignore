@@ -17,3 +17,7 @@
 /CDForestFull/CDForestFull.csproj.user
 /*.user
 /bin/Debug
+/CDSearchApp/bin/Debug
+/CDSearchApp/obj/Debug
+/CDSearchFile/bin/Debug
+/CDSearchFile/obj/Debug

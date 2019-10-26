@@ -140,10 +140,7 @@
     <Compile Include="ApacheTikaFilter.cs" />
     <Compile Include="ArchiveAnayser.cs" />
     <Compile Include="ClearanceDistanceAnalyser.cs" />
-    <Compile Include="Features.cs" />
     <Compile Include="FileAnalyser.cs" />
-    <Compile Include="FileAnalyseWriter.cs" />
-    <Compile Include="FileParseResult.cs" />
     <Compile Include="MedianFrequencyFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,6 +150,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CDSearchFile\CDSearchFile.csproj">
+      <Project>{c9e8018e-a705-4ea9-b238-d46d3c9cd35c}</Project>
+      <Name>CDSearchFile</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

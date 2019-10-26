@@ -1,6 +1,0 @@
-﻿namespace CDForestFull
-{
-	class ArchiveAnayser
-	{
-	}
-}
